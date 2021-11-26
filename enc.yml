@@ -1,0 +1,9 @@
+- service:
+    name: temp
+    source: /storage/temp
+    destination: storage/pgp/temp
+
+- service:
+    name: downloads
+    source: /storage/lessons
+    destination: storage/pgp/lessons

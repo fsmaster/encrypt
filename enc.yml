@@ -1,9 +1,12 @@
 - service:
     name: temp
     source: /storage/temp
-    destination: storage/pgp/temp
-
+    destination: /storage/gpg/temp
+    decrypt: /storage/decrypt/temp
+    test: /storage/gpg-test/temp
 - service:
     name: downloads
     source: /storage/lessons
-    destination: storage/pgp/lessons
+    destination: /storage/gpg/lessons
+    decrypt: /storage/decrypt/lessons
+    test: /storage/gpg-test/lessons

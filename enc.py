@@ -14,7 +14,7 @@ import hashlib
 
 
 
-logging.basicConfig(filename='enc.log', filemode='a', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG)
+logging.basicConfig(filename='enc.log', filemode='a', format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG)
 logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
 logging.info('This will get logged to a file')
 
@@ -96,7 +96,7 @@ def enc(source,destination,test):
                 os.rename(destination_file+'.tmp',destination_file)
             else:
                 print("diff, not renaming")
-
+                logging.error("bad DST file "+destination_file) 
 #            logging.info(hashlib.md5(source_file).hexdigest())
 #            logging.info(hashlib.md5(test_file).hexdigest())
 #            time.sleep(10)

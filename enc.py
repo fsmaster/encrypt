@@ -16,12 +16,20 @@ import hashlib
 
 logging.basicConfig(filename='enc.log', filemode='a', format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG)
 logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
-logging.info('This will get logged to a file')
+logging.info('Enc started')
 
 SECRET=os.getenv('ENC_SECRET')
 if SECRET is None:
-    print("no ENC_SECRET, exiting, h: tia int i pbmega seat full +xinxin")
+    logging.error("no ENC_SECRET, exiting, h: tia int i pbmega seat full +xinxin")
     sys.exit(-1)
+
+if not os.path.exists("enc.lock"):
+    with open('enc.lock', 'w') as fp:
+        pass
+else:
+    logging.error("evo.lock present, exitnig...")
+    sys.exit(-1)
+
 
 
 
@@ -59,14 +67,14 @@ def enc(source,destination,test):
         print (destination_file)
         print (test_file)
         if not os.path.exists(destination_file):
-            logging.info ("not exists "+str(destination_file))
+            logging.debug ("not exists "+str(destination_file))
             destination_dir=os.path.dirname(destination_file)
             if not os.path.exists(destination_dir):
                 logging.info("creating "+str(destination_dir))
                 os.makedirs(destination_dir)
 
             if not os.path.exists(test_file):
-                logging.info ("test file not exists "+str(test_file))
+                logging.debug ("test file not exists "+str(test_file))
                 test_dir=os.path.dirname(test_file)
                 if not os.path.exists(test_dir):
                     logging.info("creating test "+str(test_dir))
@@ -79,21 +87,23 @@ def enc(source,destination,test):
 
             cmd='gpg -vv --batch --passphrase '+SECRET +' --output \''+destination_file+'.tmp\''+' --symmetric \''+source_file+'\''
             cmd_test='gpg -vv --batch --passphrase '+SECRET +' --output \''+test_file+'\''+' --decrypt \''+destination_file+'.tmp\''
-            print(cmd)
-            print(cmd_test)
+#            print(cmd)
+#            print(cmd_test)
 
             result = os.system(cmd)
-            logging.info("Done enc here")
-            time.sleep(3)
+#            logging.info("Done enc here")
+#            time.sleep(3)
             result = os.system(cmd_test)
-            time.sleep(3)
+#            time.sleep(3)
 #            print (get_hash(source_file))
 #            print (get_hash(test_file))
 
-            print ("cmp")
+            logging.debug("Comparing files...")
             if same(source_file,test_file):
                 print("same, renaming")
                 os.rename(destination_file+'.tmp',destination_file)
+                os.remove(test_file)
+                logging.info("Done "+destination_file)
             else:
                 print("diff, not renaming")
                 logging.error("bad DST file "+destination_file) 
@@ -119,3 +129,5 @@ with open("enc.yml", "r") as stream:
         print(exc)
     except Exception as e:
         print(e)
+
+os.remove("enc.lock")

@@ -9,9 +9,6 @@ import glob,os,time,sys
 
 import yaml
 import logging
-import hashlib
-
-
 
 
 logging.basicConfig(filename='enc.log', filemode='a', format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%d-%b-%y %H:%M:%S', level=logging.DEBUG)

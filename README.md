@@ -18,3 +18,6 @@ gpg --batch --passphrase secret --output 21.txt --decrypt 21.txt.gpg
 
 #cron:
 34      16      *       *       *       /home/ubuntu/projects/scripts/nas-googlephotos.sh>/var/log/nas-googlephotos.log
+
+
+#on mikrotik do some routing and config per https://strongvpn.com/setup-mikrotik-6-l2tp/

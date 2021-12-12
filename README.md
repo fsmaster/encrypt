@@ -15,6 +15,11 @@ gpg --batch --passphrase secret --output 21.txt --decrypt 21.txt.gpg
 
 
  sshpass -p "password" rsync -R -avzh  admin@192.168.12.5:/mnt/HD/HD_a2/igor_hdd/ /storage/igor_hdd/
+ 
+ #when have ssh error
+
+sshpass -p "password" rsync -R -avzh -e "ssh -o StrictHostKeyChecking=no"  admin@192.168.12.5:/mnt/HD/HD_a2/ /storage/nas_3tb/
+
 
 #cron:
 34      16      *       *       *       /home/ubuntu/projects/scripts/nas-googlephotos.sh>/var/log/nas-googlephotos.log

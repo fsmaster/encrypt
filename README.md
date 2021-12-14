@@ -26,3 +26,7 @@ sshpass -p "password" rsync -R -avzh -e "ssh -o StrictHostKeyChecking=no"  admin
 
 
 #on mikrotik do some routing and config per https://strongvpn.com/setup-mikrotik-6-l2tp/
+
+# on windows
+
+route add 192.168.12.0 mask 255.255.255.0 192.168.4.38 metric 1

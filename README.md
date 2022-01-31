@@ -20,7 +20,7 @@ gpg --batch --passphrase secret --output 21.txt --decrypt 21.txt.gpg
 
 sshpass -p "password" rsync -R -avzh -e "ssh -o StrictHostKeyChecking=no  -o UserKnownHostsFile=/dev/null"  admin@192.168.12.5:/mnt/HD/HD_a2/ /storage/nas_3tb/
 
-# -o UserKnownHostsFile=/dev/null -beacause of old NAS, do not store known_hosts
+\# -o UserKnownHostsFile=/dev/null -beacause of old NAS, do not store known_hosts
 
 #cron:
 34      16      *       *       *       /home/ubuntu/projects/scripts/nas-googlephotos.sh>/var/log/nas-googlephotos.log

@@ -1,0 +1,6 @@
+#destination is source, decrypt is destination, other keys are ignored
+- service:
+    name: lessons
+    source: /storage/temp
+    destination: /storage/gpg/lessons
+    decrypt: /storage/decrypt-temp/le

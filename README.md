@@ -1,5 +1,10 @@
 # encrypt
 
+ENC_SECRET='password'
+
+export ENC_SECRET
+
+
 echo "secret" | gpg --batch --passphrase-fd 0 --output a.txt.gpg --symmetric a.txt
 
 echo "secret" | gpg --batch --passphrase-fd 0 --output b.txt --decrypt a.txt.gpg
@@ -31,3 +36,21 @@ sshpass -p "password" rsync -R -avzh -e "ssh -o StrictHostKeyChecking=no  -o Use
 # on windows
 
 route add 192.168.12.0 mask 255.255.255.0 192.168.4.38 metric 1
+
+# decrypt
+
+ENC_SECRET='password'
+
+export ENC_SECRET
+
+1. configure decrypt.yml as example
+\#destination is source, decrypt is destination, other keys are ignored
+- service:
+    name: lessons
+    source: /storage/temp
+    destination: /storage/gpg/lessons
+    decrypt: /storage/decrypt-temp/lessons
+    test: /storage/gpg-test/temp
+
+2. run decrypt.py
+3. 

@@ -37,6 +37,10 @@ sshpass -p "password" rsync -R -avzh -e "ssh -o StrictHostKeyChecking=no  -o Use
 
 route add 192.168.12.0 mask 255.255.255.0 192.168.4.38 metric 1
 
+# on linux
+
+ ip route add 192.168.12.5 via 192.168.4.38
+
 # decrypt
 
 ENC_SECRET='password'
